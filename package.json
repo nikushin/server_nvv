@@ -1,0 +1,21 @@
+{
+  "name": "server_nvv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "modbus-serial": "^8.0.5",
+    "mongodb": "^4.7.0",
+    "mysql2": "^2.3.3",
+    "node-json-db": "^1.5.0",
+    "node-telegram-bot-api": "^0.58.0",
+    "nodemon": "^2.0.18",
+    "socket.io": "^4.5.1"
+  }
+}

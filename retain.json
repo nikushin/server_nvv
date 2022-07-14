@@ -1,0 +1,77 @@
+{
+  "sp": {
+    "flaps": {
+      "full_move_time": 50,
+      "bathroom_inflow": 0,
+      "bathroom_exhaust": 0,
+      "out_inflow": 0,
+      "out_exhaust": 0,
+      "cabinet_inflow": 0,
+      "cabinet_exhaust": 0,
+      "room2_inflow": 0,
+      "room2_exhaust": 0,
+      "kitchen_inflow": 0,
+      "kitchen_exhaust": 0
+    },
+    "fans": {
+      "cabinet_inflow_co2": {
+        "1": 800,
+        "2": 1200,
+        "3": 1600
+      },
+      "cabinet_exhaust_co2": {
+        "1": 800,
+        "2": 1200,
+        "3": 1600
+      },
+      "bathroom_inflow_hum": {
+        "1": 50,
+        "2": 70,
+        "3": 85
+      },
+      "bathroom_exhaust_hum": {
+        "1": 50,
+        "2": 70,
+        "3": 85
+      }
+    },
+    "vlv_to_rooms_tob": 20,
+    "burner_for_boiler": 60
+  },
+  "in_work": {
+    "flaps": {
+      "cabinet_inflow": true,
+      "cabinet_exhaust": true,
+      "room2_inflow": true,
+      "room2_exhaust": true,
+      "kitchen_inflow": true,
+      "kitchen_exhaust": true,
+      "bathroom_inflow": true,
+      "bathroom_exhaust": true,
+      "out_inflow": true,
+      "out_exhaust": true
+    }
+  },
+  "pumps": {
+    "heating": false,
+    "collector": false,
+    "pool": false,
+    "floor": false
+  },
+  "manual": {
+    "fans": {
+      "mode": false,
+      "inflow_fan_speed": 0,
+      "exhaust_fan_speed": 0
+    },
+    "vlv_to_rooms_tob": {
+      "mode": true,
+      "value": true
+    },
+    "burner": {
+      "mode": false,
+      "value": false
+    },
+    "vlv_collector": true
+  }
+}
