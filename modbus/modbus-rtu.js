@@ -31,6 +31,7 @@ const WB_cabinet_address = 1;
 const pde_in_to_out_address = 3;
 const pde_out_to_in_address = 4;
 const transformer_address = 5;
+const garage_address = 6;
 
 const modbusConnect = async () => {
     flags.ready = false; flags.tryCon = true;
