@@ -1,11 +1,12 @@
+
+
+
+
+
+
 module.exports = {
     retain: {
         sp: {
-            // valve: {
-            //     vlv_collector: false,
-            //     vlv_to_rooms_tob: false,
-            //     burner: false,
-            // },
             flaps: {
                 full_move_time: 10,
                 bathroom_inflow: 0,
@@ -19,6 +20,7 @@ module.exports = {
                 kitchen_inflow: 0,
                 kitchen_exhaust: 0,
             },
+
             fans : {
                 cabinet_inflow_co2: {1: 800, 2: 1200, 3: 1600,},
                 cabinet_exhaust_co2: {1: 800, 2: 1200, 3: 1600,},
@@ -78,6 +80,8 @@ module.exports = {
             pde_in_to_out: undefined,
             pde_out_to_in: undefined,
             transformer_cur: undefined,
+            te_garage: undefined,
+            hum_garage: undefined,
         },
         discreteOutput: {
             pump_heating: false,
@@ -149,8 +153,6 @@ module.exports = {
             te_outdoor: undefined,
             te_garret: undefined,
             hum_garret: undefined,
-            te_garage: undefined,
-            hum_garage: undefined,
             rec_te_out: undefined,
             rec_te_from_rooms: undefined,
             rec_te_to_rooms: undefined,

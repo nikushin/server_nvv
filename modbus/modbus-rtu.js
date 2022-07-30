@@ -144,6 +144,28 @@ const Transformer_read = async () => {
         });
 };
 
+const Garage_read = async () => {
+    Modbusclient.setID(garage_address);
+    await Modbusclient.readInputRegisters(102, 2).then((data) => {
+        data.data[0] = wordToInt(data.data[0]);
+        data.data[0]/=100;
+        if (memory.operative.modbus.te_garage !== data.data[0]) {
+            memory.operative.modbus.te_garage = data.data[0];
+            socket.emit('memory_change', {path: 'operative.modbus.te_garage', value: data.data[0]});
+            console.log(memory.operative.modbus.te_garage)
+        }
+        data.data[1]/=100;
+        if (memory.operative.modbus.hum_garage !== data.data[1]) {
+            memory.operative.modbushum_garage = data.data[1];
+            socket.emit('memory_change', {path: 'operative.modbus.hum_garage', value: data.data[1]});
+            console.log(memory.operative.modbus.hum_garage)
+        }
+    })
+        .catch(err => {
+            console.log('Garage_te_hum', err.message)
+        });
+};
+
 const ModbusRTUloop = async () => {
     if (!flags.ready && !flags.tryCon) {await modbusConnect()}
     if (flags.ready) {
@@ -152,6 +174,7 @@ const ModbusRTUloop = async () => {
         //await PDD_general_parameters({address: pde_in_to_out_address, parameter: 'pde_in_to_out'});
         //await PDD_general_parameters({address: pde_out_to_in_address, parameter: 'pde_out_to_in'});
         //await Transformer_read();
+        await Garage_read()
     }
     setTimeout(() => ModbusRTUloop(), 2000);
 };
