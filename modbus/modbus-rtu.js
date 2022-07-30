@@ -23,7 +23,7 @@ const wordToInt = (word) => {
 
 
 const Modbusclient = new ModbusRTU();
-Modbusclient.setTimeout(300);
+Modbusclient.setTimeout(1000);
 
 const flags = {ready: false, tryCon : false};
 const WB_bathroom_address = 2;
@@ -37,8 +37,8 @@ const modbusConnect = async () => {
     flags.ready = false; flags.tryCon = true;
     //Modbusclient.connectRTUBuffered('/dev/ttyUSB0', {baudRate: 19200, parity: "even", dataBits: 8, stopBits: 1 }, (err) => {
     //Modbusclient.connectRTUBuffered('/dev/serial0', {baudRate: 9600, parity: "even", dataBits: 8, stopBits: 1 }, (err) => {
-    await Modbusclient.connectRTUBuffered('COM30', {baudRate: 9200, parity: "none", dataBits: 8, stopBits: 1 }
-    //Modbusclient.connectRTUBuffered('/dev/ttyAMA1', {
+    //await Modbusclient.connectRTUBuffered('COM30', {baudRate: 9600, parity: "none", dataBits: 8, stopBits: 1 }
+	await Modbusclient.connectRTUBuffered('/dev/ttyAMA1', {baudRate: 9600, parity: "none", dataBits: 8, stopBits: 1 }
     //await Modbusclient.connectRTUBuffered('/dev/ttyS0', {baudRate: 19200, parity: "even", dataBits: 8, stopBits: 1}
     ).then(() => {flags.ready = true; flags.tryCon = false;
     //console.log('порт открыт')
@@ -146,19 +146,22 @@ const Transformer_read = async () => {
 
 const Garage_read = async () => {
     Modbusclient.setID(garage_address);
-    await Modbusclient.readInputRegisters(102, 2).then((data) => {
+    await Modbusclient.readHoldingRegisters(258, 2).then((data) => {
+		//console.log(data.data)
         data.data[0] = wordToInt(data.data[0]);
         data.data[0]/=100;
+		data.data[0] = data.data[0].toFixed(1); 
         if (memory.operative.modbus.te_garage !== data.data[0]) {
             memory.operative.modbus.te_garage = data.data[0];
             socket.emit('memory_change', {path: 'operative.modbus.te_garage', value: data.data[0]});
-            console.log(memory.operative.modbus.te_garage)
+            console.log('te_garage ', memory.operative.modbus.te_garage)
         }
         data.data[1]/=100;
+		data.data[1] = data.data[1].toFixed(1);
         if (memory.operative.modbus.hum_garage !== data.data[1]) {
-            memory.operative.modbushum_garage = data.data[1];
+            memory.operative.modbus.hum_garage = data.data[1];
             socket.emit('memory_change', {path: 'operative.modbus.hum_garage', value: data.data[1]});
-            console.log(memory.operative.modbus.hum_garage)
+            console.log('hum_garage ', memory.operative.modbus.hum_garage)
         }
     })
         .catch(err => {
